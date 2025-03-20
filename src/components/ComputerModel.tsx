@@ -20,7 +20,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Scene(props: React.ComponentProps<"group">) {
+export default function ComputerModel(props: React.ComponentProps<"group">) {
   const { nodes, materials } = useGLTF(
     "/computer/scene.gltf"
   ) as unknown as GLTFResult;
