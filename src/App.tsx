@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Center } from "@react-three/drei";
 import { Suspense } from "react";
 import CanvasLoader from "./components/CanvasLoader";
 import OldTvModel from "./components/OldTvModel";
@@ -11,8 +11,15 @@ function App() {
         <Suspense fallback={<CanvasLoader />}>
           <ambientLight intensity={0.5} />
           <directionalLight color="white" position={[5, 5, 25]} />
-          <OrbitControls minDistance={300} />
-          <OldTvModel scale={0.4} position={[0, -175, 0]} />
+          <OrbitControls
+            minDistance={500}
+            maxPolarAngle={Math.PI / 2}
+            enableZoom={false}
+            enablePan={false}
+          />
+          <Center>
+            <OldTvModel scale={0.5} />
+          </Center>
         </Suspense>
       </Canvas>
     </main>

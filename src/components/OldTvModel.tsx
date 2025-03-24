@@ -8,7 +8,7 @@ Title: Old TV
 
 import * as THREE from "three";
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useVideoTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -45,8 +45,20 @@ export default function OldTvModel(props: React.ComponentProps<"group">) {
     "/oldtv/scene.gltf"
   ) as unknown as GLTFResult;
   const groupRef = useRef<THREE.Group>(null);
+  const screentxt = useVideoTexture("/screen/tvstatic.mp4");
   return (
     <group ref={groupRef} {...props} dispose={null}>
+      <mesh
+        name="tv-screen"
+        castShadow
+        receiveShadow
+        geometry={nodes.TV011_glassBack_0.geometry}
+        material={materials.glassBack}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={100}
+      >
+        <meshBasicMaterial map={screentxt} />
+      </mesh>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
         <mesh
           castShadow
@@ -75,6 +87,7 @@ export default function OldTvModel(props: React.ComponentProps<"group">) {
           material={materials.Metal}
         />
       </group>
+
       <mesh
         castShadow
         receiveShadow
@@ -139,14 +152,7 @@ export default function OldTvModel(props: React.ComponentProps<"group">) {
         rotation={[-Math.PI / 2, 0, 0]}
         scale={100}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.TV011_glassBack_0.geometry}
-        material={materials.glassBack}
-        rotation={[-Math.PI / 2, 0, 0]}
-        scale={100}
-      />
+
       <mesh
         castShadow
         receiveShadow
