@@ -8,7 +8,7 @@ Title: 1990 TV
 
 import * as THREE from "three";
 import React, { useRef } from "react";
-import { MeshReflectorMaterial, useGLTF, useTexture } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -30,7 +30,6 @@ export default function NinetiesTvModel(props: React.ComponentProps<"group">) {
     "/ninetiestv/scene.gltf"
   ) as unknown as GLTFResult;
   const groupRef = useRef<THREE.Group>(null);
-  const screenTexture = useTexture("ninetiestv/textures/static.jpg");
   return (
     <group ref={groupRef} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={1}>
@@ -40,9 +39,7 @@ export default function NinetiesTvModel(props: React.ComponentProps<"group">) {
             receiveShadow
             geometry={nodes.defaultMaterial.geometry}
             material={materials.DefaultMaterial}
-          >
-            {/* <MeshReflectorMaterial map={screenTexture} /> */}
-          </mesh>
+          ></mesh>
           <mesh
             castShadow
             receiveShadow
